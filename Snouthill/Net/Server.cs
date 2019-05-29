@@ -27,7 +27,7 @@ namespace Snouthill.Net
             Game = game;
 
             // Create listeners for login and each public room
-            var startingPort = Config.Instance.MainPort;
+            var startingPort = ServerConfig.MainPort;
             _listeners = new List<TcpListener>
             {
                 StartListener(startingPort)

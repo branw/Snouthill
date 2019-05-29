@@ -17,9 +17,9 @@ namespace Snouthill.Net
         public Server Server { get; }
 
         public ClientConnection Connection { get; }
-        public bool IsMainConnection => Connection?.Port == Config.Instance.MainPort;
-        public bool IsPublicRoomConnection => Connection?.Port > Config.Instance.MainPort;
-        public bool IsPrivateRoomConnection => Connection?.Port == Config.Instance.PrivateRoomPort;
+        public bool IsMainConnection => Connection?.Port == ServerConfig.Instance.MainPort;
+        public bool IsPublicRoomConnection => Connection?.Port > ServerConfig.Instance.MainPort;
+        public bool IsPrivateRoomConnection => Connection?.Port == ServerConfig.Instance.PrivateRoomPort;
 
         public IEnumerable<Client> OtherClientsForUser => 
             Server.Clients.Where(c => c != this && c.Authenticated && c.User.Username == User.Username);
@@ -76,7 +76,7 @@ namespace Snouthill.Net
 
         public bool Authenticate(string username, string password)
         {
-            using (var db = new Database())
+            using (var db = new DatabaseContext())
             {
                 var user = db.Users.SingleOrDefault(p => p.Username == username);
 

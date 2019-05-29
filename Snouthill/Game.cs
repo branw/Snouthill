@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Snouthill
 {
+    /*
     public class Game
     {
         public Server Server { get; }
@@ -36,7 +37,7 @@ namespace Snouthill
             {
 
 
-                await Task.Delay(Config.Instance.Timestep, stoppingToken);
+                await Task.Delay(ServerConfig.Timestep, stoppingToken);
             }
         }
     }

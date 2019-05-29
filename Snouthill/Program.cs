@@ -1,16 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Snouthill.Net.Inbound;
-using Snouthill.Net.Outbound;
-using System;
-using System.Text;
 using System.Threading.Tasks;
 using Serilog;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Events;
-using Serilog.Core;
-using System.Diagnostics;
-using Serilog.Configuration;
-using System.Linq;
+using Snouthill.Util;
 
 namespace Snouthill
 {
@@ -22,8 +15,10 @@ namespace Snouthill
                 .UseConsoleLifetime()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    // Hide hosting messages shown on the console
                     services.Configure<ConsoleLifetimeOptions>(options => options.SuppressStatusMessages = true);
-                    services.AddHostedService<GameManager>();
+
+                    services.AddHostedService<ServerManager>();
                 })
                 .ConfigureAppConfiguration(config =>
                 {
@@ -39,40 +34,6 @@ namespace Snouthill
                 .UseSerilog()
                 .Build()
                 .RunAsync();
-        }
-    }
-
-    class CallerEnricher : ILogEventEnricher
-    {
-        public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
-        {
-            var skip = 3;
-            while (true)
-            {
-                var stack = new StackFrame(skip);
-                if (!stack.HasMethod())
-                {
-                    logEvent.AddPropertyIfAbsent(new LogEventProperty("Caller", new ScalarValue("<unknown method>")));
-                    return;
-                }
-
-                var method = stack.GetMethod();
-                if (method.DeclaringType.Assembly != typeof(Log).Assembly)
-                {
-                    var caller = $"{method.DeclaringType.FullName}.{method.Name}({string.Join(", ", method.GetParameters().Select(pi => pi.ParameterType.FullName))})";
-                    logEvent.AddPropertyIfAbsent(new LogEventProperty("Caller", new ScalarValue(caller)));
-                }
-
-                skip++;
-            }
-        }
-    }
-
-    static class LoggerCallerEnrichmentConfiguration
-    {
-        public static LoggerConfiguration WithCaller(this LoggerEnrichmentConfiguration enrichmentConfiguration)
-        {
-            return enrichmentConfiguration.With<CallerEnricher>();
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Snouthill.Net.Outbound
             {
                 var subunit = (room.Info.Model.FileName, 0, room.Info.MaxOccupancy, room.Info.Model.ModelName);
                 units.Add(new Unit(room.Info.Name, 0, room.Info.MaxOccupancy, "127.0.0.1",
-                    Config.Instance.MainPort + room.Info.Id, new List<(string, int, int, string)>() { subunit }));
+                    ServerConfig.Instance.MainPort + room.Info.Id, new List<(string, int, int, string)>() { subunit }));
             }
 
             Units = units;

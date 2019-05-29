@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Snouthill
 {
+    /*
     public class Furni
     {
         public int Id { get; }
@@ -115,7 +116,7 @@ namespace Snouthill
 
             _rooms = new List<Room>();
 
-            using (var db = new Database())
+            using (var db = new DatabaseContext())
             {
                 var publicRooms = db.Rooms.Where(r => r.IsPublic);
                 foreach(var roomInfo in publicRooms)
@@ -133,4 +134,5 @@ namespace Snouthill
             return Rooms.Where(r => r.Info.IsPublic);   
         }
     }
+    */
 }

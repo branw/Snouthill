@@ -128,7 +128,7 @@ namespace Snouthill.Net.Inbound
 
             Log.Information("Updating {username}", Username);
 
-            using (var db = new Database())
+            using (var db = new DatabaseContext())
             {
                 client.User.Password = Password;
                 client.User.Email = Email;
@@ -171,7 +171,7 @@ namespace Snouthill.Net.Inbound
         {
             Log.Information("Registering {username}", Username);
 
-            using (var db = new Database())
+            using (var db = new DatabaseContext())
             {
                 db.Users.Add(new User()
                 {
