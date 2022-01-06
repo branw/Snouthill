@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>dotnet-Snouthill-95B00309-D34E-4BBC-819E-E5ED33CF5E04</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.1"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0"/>
+        <PackageReference Include="Serilog.Exceptions" Version="8.0.0"/>
+        <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.0.0"/>
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.0.2-dev-00890"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
+        <PackageReference Include="System.IO.Pipelines" Version="6.0.1"/>
+    </ItemGroup>
+</Project>
